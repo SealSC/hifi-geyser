@@ -42,7 +42,7 @@ export default {
 
       products: [
         {
-          img: "/static/icon/USDT-ETH.png",
+          img: "/static/icons/USDT-ETH.png",
           name: "USDT-ETH",
           txt: "Deposit USDT-ETH LP Earn HIFI",
           tx: "USDT-ETH",
@@ -53,7 +53,7 @@ export default {
           LPToken: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852",
         },
         {
-          img: "/static/icon/USDC-ETH.png",
+          img: "/static/icons/USDC-ETH.png",
           name: "USDC-ETH",
           txt: "Deposit USDC-ETH LP Earn HIFI",
           tx: "USDC-ETH",
@@ -64,7 +64,7 @@ export default {
           LPToken: "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
         },
         {
-          img: "/static/icon/DAI-ETH.png",
+          img: "/static/icons/DAI-ETH.png",
           name: "DAI-ETH",
           txt: "Deposit DAI-ETH LP Earn HIFI",
           tx: "DAI-ETH",
@@ -75,7 +75,7 @@ export default {
           LPToken: "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
         },
         {
-          img: "/static/icon/COMP-ETH.png",
+          img: "/static/icons/COMP-ETH.png",
           name: "COMP-ETH",
           txt: "Deposit COMP-ETH LP Earn HIFI",
           tx: "COMP-ETH",
@@ -86,7 +86,7 @@ export default {
           LPToken: "0xcffdded873554f362ac02f8fb1f02e5ada10516f",
         },
         {
-          img: "/static/icon/LEND-ETH.png",
+          img: "/static/icons/LEND-ETH.png",
           name: "LEND-ETH",
           txt: "Deposit LEND-ETH LP Earn HIFI",
           tx: "LEND-ETH",
@@ -97,7 +97,7 @@ export default {
           LPToken: "0xab3f9bf1d81ddb224a2014e98b238638824bcf20",
         },
         {
-          img: "/static/icon/LAT-ETH.png",
+          img: "/static/icons/LAT-ETH.png",
           name: "LAT-ETH",
           txt: "Deposit LAT-ETH LP Earn HIFI",
           tx: "LAT-ETH",
@@ -108,7 +108,7 @@ export default {
           LPToken: "",
         },
         {
-          img: "/static/icon/LAT-CIT1.png",
+          img: "/static/icons/LAT-CIT1.png",
           name: "LAT-CIT1",
           txt: "Deposit LAT-CIT1 LP Earn HIFI",
           tx: "LAT-CIT1",

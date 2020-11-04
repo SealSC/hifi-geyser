@@ -60,11 +60,11 @@
           <div class="row">
             <div class="col d-flex justify-content-around">
               <button v-show="walletConnectView" type="submit" class="wallet-btn" @click="openMetamask">
-<!--                <img class="wallet-btn-icon text-right" :src="'/static/logo/logo.png'" :alt="$t('wallet.metamask')"/>-->
+<!--                <img class="wallet-btn-icons text-right" :src="'/static/logo/logo.png'" :alt="$t('wallet.metamask')"/>-->
                 <h2 class="wallet-btn-name text-left">{{ $t("wallet.name") }}</h2>
               </button>
               <button v-show="!walletConnectView" type="submit" class="wallet-btn" @click="seeTheMenu">
-<!--                <img class="wallet-btn-icon text-right" :src="'/static/logo/logo.png'" alt=""/>-->
+<!--                <img class="wallet-btn-icons text-right" :src="'/static/logo/logo.png'" alt=""/>-->
                 <h2 class="wallet-btn-name text-left">{{ $t("wallet.seeTheMenu") }}</h2>
               </button>
             </div>
@@ -90,14 +90,15 @@ import chainOpt from "../../utils/web3/chainOperation";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Decimals from "decimal.js"
+import {uniAddrs} from "@/utils/web3/constant";
 
 window.mingingPoolInfo = {}
 let opt = chainOpt.opt
 
-const startBlock = 10962850
+const startBlock = 11195780
 const rewardPerBlock = 5
-const slowBlockStart = 10969350
-const slowBlockPerReward = "2.080586080586081000"
+const slowBlockStart = 11202280
+const slowBlockPerReward = "1.941880341880342000"
 
 export default {
   name: "Wallet",
@@ -125,24 +126,42 @@ export default {
   },
 
   methods: {
-    setWalletConnected() {
-      opt.getBlockNum()
-          .then(r=>{
-            if(r > 0 && r > slowBlockStart) {
-              let totalReward = new Decimals(slowBlockStart).sub(startBlock)
-              let slowedReward = new Decimals(r).sub(slowBlockStart)
-
-              let total = totalReward.mul(rewardPerBlock)
-              let slowed = slowedReward.mul(slowBlockPerReward);
-              this.totalReward = total.add(slowed).toDP(2, Decimals.ROUND_FLOOR).toString()
-              this.rewardsBalance = slowBlockPerReward
-            } else if(r > 0 && r > startBlock) {
-              let totalReward = new Decimals(r).sub(startBlock)
-              this.totalReward = totalReward.mul(rewardPerBlock).toDP(2, Decimals.ROUND_FLOOR).toString()
-            } else {
-              this.totalReward = "0"
-            }
+    async updatePoolInfo() {
+      let totalCollected = new Decimals(0);
+      for(let i=0; i<uniAddrs.length; i++) {
+        try {
+          let pool = await opt.poolInfo(i)
+          totalCollected = totalCollected.add(pool.userToCollect)
+          this.$nextTick(_=>{
+            this.tokenBalance = totalCollected.toDP(6, Decimals.ROUND_FLOOR).toString()
           })
+        } catch (e) {}
+      }
+
+    },
+
+    async setWalletConnected() {
+      this.updatePoolInfo()
+      await opt.getBlockNum()
+          .then(r=>{
+            // if(r > 0 && r > slowBlockStart) {
+            //   let totalReward = new Decimals(slowBlockStart).sub(startBlock)
+            //   let slowedReward = new Decimals(r).sub(slowBlockStart)
+            //
+            //   let total = totalReward.mul(rewardPerBlock)
+            //   let slowed = slowedReward.mul(slowBlockPerReward);
+            //   this.totalReward = total.add(slowed).toDP(2, Decimals.ROUND_FLOOR).toString()
+            //   this.rewardsBalance = slowBlockPerReward
+            // } else if(r > 0 && r > startBlock) {
+            //   let totalReward = new Decimals(r).sub(startBlock)
+            //   this.totalReward = totalReward.mul(rewardPerBlock).toDP(2, Decimals.ROUND_FLOOR).toString()
+            // } else {
+            //   this.totalReward = "0"
+            // }
+          })
+
+      this.totalReward = await opt.totalHiFiSupply()
+      this.rewardsBalance = await opt.rewardPerBlock()
 
       opt.userTokenBalance()
           .then(r=>{

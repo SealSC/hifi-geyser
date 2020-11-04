@@ -2,7 +2,7 @@
   <div class="detail-div">
     <div class="row">
       <div class="col text-center">
-        <img class="home-logo" :src="'/static/icon/' + this.$route.params.tx_id + '.png'" alt=""/>
+        <img class="home-logo" :src="'/static/icons/' + this.$route.params.tx_id + '.png'" alt=""/>
 <!--        <img class="home-logo" :src="'/static/actions/track.png'" alt=""/>-->
       </div>
     </div>

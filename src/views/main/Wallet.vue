@@ -96,7 +96,7 @@ window.mingingPoolInfo = {}
 let opt = chainOpt.opt
 
 const startBlock = 11195780
-const rewardPerBlock = 5
+const rewardPerBlock = "1.9418"
 const slowBlockStart = 11202280
 const slowBlockPerReward = "1.941880341880342000"
 
@@ -112,7 +112,7 @@ export default {
       walletConnectError: false,
 
       tokenBalance: "0",
-      rewardsBalance: "5",
+      rewardsBalance: "1.9418",
 
       totalReward: false,
       userBalance: false,

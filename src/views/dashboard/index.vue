@@ -102,10 +102,10 @@ export default {
           txt: "Deposit LAT-ETH LP Earn HIFI",
           tx: "LAT-ETH",
           apy: "1666",
-          stat: false,
+          stat: true,
           dateTime: "",
           double: true,
-          LPToken: "",
+          LPToken: "0x38434e709c9892e94bd0c7d40c8db0dfd1ed0373",
         },
         {
           img: "/static/icons/LAT-CIT1.png",
